@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bean.Comment;
 import com.bean.MyOrder;
 import com.bean.Order;
 import com.bean.OrderItem;
+import com.bean.vo.OrderVo;
+import com.common.Result;
 import com.service.OrderService;
 
 
@@ -29,42 +32,45 @@ import com.service.OrderService;
 public class OrderController {
 		@Autowired
 		private OrderService orderservice;
-		@RequestMapping(value = "/addOrder", method = RequestMethod.POST,produces = "application/json;charsest=utf-8")
-	    @ResponseBody
-	    public void addOrder(Order order) {
-			orderservice.addOrder(order);
-		}
 		
-		@RequestMapping(value = "/addOrderItem", method = RequestMethod.POST,produces = "application/json;charsest=utf-8")
+
+		@RequestMapping(value = "/addComment", method = RequestMethod.POST,produces = "application/json;charsest=utf-8")
 		@ResponseBody
-		public void addOrderItem(OrderItem orderitem) {
-				orderservice.addOrderItem(orderitem);
+		public void addComment(Comment comment) {
+			orderservice.addComment(comment);
 			}
+		@RequestMapping(value = "/getComment", method = RequestMethod.GET,produces = "application/json;charsest=utf-8")
+		@ResponseBody
+		public String getComment(Integer pid) {
+			List<Comment> comment=orderservice.getComment(pid);
+			return JSON.toJSONString(Result.success(comment));
+			}
+		
 		@RequestMapping(value = "/getMyOrder", method = RequestMethod.GET,produces = "application/json;charsest=utf-8")
 		@ResponseBody
 		public String getMyOrder() {
 			List<MyOrder> myorder= orderservice.getMyOrder();
-			return JSON.toJSONString(myorder);
+			return JSON.toJSONString(Result.success(myorder));
 			}
 	
 		@RequestMapping(value = "/getOrderUnPay", method = RequestMethod.GET,produces = "application/json;charsest=utf-8")
 		@ResponseBody
 		public String getOrderUnPay() {
 			List<MyOrder> myorder= orderservice.getOrderUnPay();
-			return JSON.toJSONString(myorder);
+			return JSON.toJSONString(Result.success(myorder));
 			}
 		@RequestMapping(value = "/getOrdersUnDeliver", method = RequestMethod.GET,produces = "application/json;charsest=utf-8")
 		@ResponseBody
 		public String getOrdersUnDeliver() {
 			List<MyOrder> myorder= orderservice.getOrdersUnDeliver();
-			return JSON.toJSONString(myorder);
+			return JSON.toJSONString(Result.success(myorder));
 			}
 		
 		@RequestMapping(value = "/getOrdersUnReceive", method = RequestMethod.GET,produces = "application/json;charsest=utf-8")
 		@ResponseBody
 		public String getOrdersUnReceive() {
 			List<MyOrder> myorder= orderservice.getOrdersUnReceive();
-			return JSON.toJSONString(myorder);
+			return JSON.toJSONString(Result.success(myorder));
 			}
 		
 		
@@ -72,7 +78,7 @@ public class OrderController {
 		@ResponseBody
 		public String getOrdersUnComment() {
 			List<MyOrder> myorder= orderservice.getOrdersUnComment();
-			return JSON.toJSONString(myorder);
+			return JSON.toJSONString(Result.success(myorder));
 			}
 		@RequestMapping(value = "/delCurrentOrder", method = RequestMethod.POST,produces = "application/json;charsest=utf-8")
 		@ResponseBody
@@ -83,7 +89,7 @@ public class OrderController {
 		@ResponseBody
 		public String getOrderId(String orderNum) {
 			Order order=orderservice.getOrderId(orderNum);
-			return JSON.toJSONString(order);
+			return JSON.toJSONString(Result.success(order));
 			}
 		
 		@RequestMapping(value = "/updateStatus", method = RequestMethod.POST,produces = "application/json;charsest=utf-8")
@@ -97,20 +103,23 @@ public class OrderController {
 		public void updLeftStatus(MyOrder order) {
 		   orderservice.updLeftStatus(order);
 			}
-//		public void addOrder(@RequestBody String obj) {
-//			JSONObject jsonObject = JSONObject.parseObject(obj);
-//	        //通过迭代器获得json当中所有的key值
-//	        Iterator keys = jsonObject.keys();
-//	        //然后通过循环遍历出的key值
-//	        while (keys.hasNext()){
-//	            String key = String.valueOf(keys.next());
-//	            //通过通过刚刚得到的key值去解析后面的json了
-//	        }
-//			
-//			System.out.println(obj.toString()+"wwwwwww");
-//			orderservice.addOrder(order, orderitem);
-//			System.out.println(order+"wwwwwww");
-			
+		
+		@RequestMapping(value = "/addOrder", method = RequestMethod.POST,produces = "application/json;charsest=utf-8")
+	    @ResponseBody
+		public void addOrder(OrderVo orderVo) {
+			Order order = new Order();
+			order.setAddress(orderVo.getAddress());
+			order.setOrderNum(orderVo.getOrderNum());
+			order.setCreateDate(orderVo.getCreateDate());
+			order.setPostNum(orderVo.getPostNum());
+			order.setReceiverName(orderVo.getReceiverName());
+			order.setTel(orderVo.getTel());
+			OrderItem orderItem = new OrderItem();
+			orderItem.setPid(orderVo.getPid());
+			orderItem.setNumber(orderVo.getNumber());
+			orderItem.setUid(orderVo.getUid());
+			orderservice.addOrder(order, orderItem);
+		}
 		
 //		public void addOrder(@RequestBody Map<String,Object> map) throws  IOException {
 //			ObjectMapper objectmapper=new ObjectMapper();

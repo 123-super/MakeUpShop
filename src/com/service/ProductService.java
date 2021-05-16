@@ -7,5 +7,5 @@ import com.bean.PropertyValue;
 
 public interface ProductService {
 	public List<Product> getProductById(Integer id);
-	
+	public List<Product> searchProduct(String name);
 }

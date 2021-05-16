@@ -16,6 +16,11 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> getProductById(Integer id){
 		return productmapper.getProductById(id);
 	}
+	@Override
+	public List<Product> searchProduct(String name) {
+		// TODO Auto-generated method stub
+		return productmapper.searchProduct(name);
+	}
 	
 	
 }

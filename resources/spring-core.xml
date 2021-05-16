@@ -32,6 +32,8 @@
         <property name="password" value="${password}" />
     </bean>
     
+    <bean id="tokenService" class="com.common.TokenService"/>
+    
     <!-- spring会帮我们创建sqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     	<property name="dataSource" ref="dataSource"></property>  
@@ -65,6 +67,5 @@
             expression="execution(* com.service.*.*(..))" />
         <aop:advisor advice-ref="adviceTran" pointcut-ref="serviceMethod" />
     </aop:config>
-        
     
 </beans>

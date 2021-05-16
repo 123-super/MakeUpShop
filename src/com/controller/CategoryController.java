@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.bean.Category;
 import com.bean.Product;
+import com.common.Result;
 import com.service.CategoryService;
 
-import com.utils.ResponseObj;
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
@@ -25,14 +25,14 @@ public class CategoryController {
 	public String getCategory() {
 		List<Category> category = categoryservice.getCategory();
 		System.out.print(category+"+++++++++++++");
-		return JSON.toJSONString(category);
+		return JSON.toJSONString(Result.success(category));
 	}
 	@RequestMapping(value = "/getProductByCid", method = RequestMethod.GET, produces = "application/json;charsest=utf-8")
 	@ResponseBody
 	public String getProductByCid(Integer cid) {
 		List<Product> product = categoryservice.getProductByCid(cid);
 		System.out.print(product+"+++++++++++++");
-		return JSON.toJSONString(product);
+		return JSON.toJSONString(Result.success(product));
 	}
 	
 	
@@ -41,7 +41,7 @@ public class CategoryController {
 	public String getProductByCidlimit(Integer cid) {
 		List<Product> product1 = categoryservice.getProductByCidlimit(cid);
 		System.out.print(product1+"+++++++++++++");
-		return JSON.toJSONString(product1);
+		return JSON.toJSONString(Result.success(product1));
 	}
 	
 	
@@ -50,7 +50,7 @@ public class CategoryController {
 	@ResponseBody
 	public String search(String search) {
 		List<Category> s=categoryservice.search(search);
-		return JSON.toJSONString(s);
+		return JSON.toJSONString(Result.success(s));
 	}
 	
 	@RequestMapping(value = "/delCategoryById", method = RequestMethod.POST, produces = "application/json;charsest=utf-8")

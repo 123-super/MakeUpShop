@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bean.Comment;
 import com.bean.MyOrder;
 import com.bean.Order;
 import com.bean.OrderItem;
@@ -13,15 +14,7 @@ import com.dao.OrderMapper;
 public class OrderServiceImpl implements OrderService{
 	@Autowired 
 	private OrderMapper ordermapper;
-//	@Override
-//	public void addOrder(Order order) {
-//		ordermapper.addOrder(order);
-//	}
-//
-//	@Override
-//	public void addOrderItem(OrderItem orderitem) {
-//		ordermapper.addOrderItem(orderitem);
-//	}
+
 
 	@Override
 	public List<MyOrder> getMyOrder() {
@@ -88,6 +81,18 @@ public class OrderServiceImpl implements OrderService{
 	public void updLeftStatus(MyOrder order) {
 		ordermapper.updLeftStatus(order);
 		
+	}
+
+	@Override
+	public void addComment(Comment comment) {
+		// TODO Auto-generated method stub
+		ordermapper.addComment(comment);
+	}
+
+	@Override
+	public List<Comment> getComment(Integer pid) {
+		// TODO Auto-generated method stub
+		return ordermapper.getComment(pid);
 	}
 
 	

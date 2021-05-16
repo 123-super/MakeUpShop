@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.bean.PropertyValue;
+import com.common.Result;
 import com.service.PropertyValueService;
 
 @Controller
@@ -21,7 +22,7 @@ private PropertyValueService propertyvalueservice;
 @ResponseBody
 public String getPVByPId(Integer pid) {
 	 List<PropertyValue> pv =  propertyvalueservice.getPVByPId(pid);
-	return JSON.toJSONString(pv);
+	return JSON.toJSONString(Result.success(pv));
 }
 
 
@@ -29,7 +30,7 @@ public String getPVByPId(Integer pid) {
 @ResponseBody
 public String getPVByPidAndPtid(Integer pid) {
 	 List<PropertyValue> pv1 =  propertyvalueservice.getPVByPidAndPtid(pid);
-	return JSON.toJSONString(pv1);
+	return JSON.toJSONString(Result.success(pv1));
 }
 
 }

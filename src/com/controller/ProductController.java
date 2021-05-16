@@ -12,6 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.bean.Category;
 import com.bean.Product;
 import com.bean.PropertyValue;
+import com.common.Result;
 import com.service.ProductService;
 
 @Controller
@@ -24,7 +25,14 @@ public class ProductController {
 	public String getProductById(Integer id){
 		List<Product> product = productservice.getProductById(id);
 		System.out.println(product);
-		return JSON.toJSONString(product);
+		return JSON.toJSONString(Result.success(product));		
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json;charsest=utf-8")
+	@ResponseBody
+	public String search(String name){
+		List<Product> product = productservice.searchProduct(name);
+		return JSON.toJSONString(Result.success(product));
 		
 		
 	}

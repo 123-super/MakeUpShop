@@ -7,16 +7,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id" >
 		insert into `order`(orderNum,address,postNum,receiverName,tel,uid,status,createDate) values(#{orderNum},#{address},#{postNum},#{receiverName},#{tel},#{uid},#{status},#{createDate})
 	</insert>
+	
+	<insert id="addComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="id" >
+		insert into `t-review`(content,pid,uid,createDate) values(#{content},#{pid},#{uid},#{createDate})
+	</insert>
+	<select id="getComment" resultType="Comment">
+	    select tu.username,tr.content,tr.id,tr.pid from `t_user` tu,`t-review` tr where tu.id=tr.uid and pid=#{pid}
+	</select>
 	<!-- <insert id="addOrderItem" parameterType="OrderItem">
 		insert into `orderitem`(pid,uid,number,oid)
 		values(#{pid},#{uid},#{number},LAST_INSERT_ID())
 	</insert> -->
 	<insert id="addOrderItem" parameterType="OrderItem">
 		insert into `orderitem`(pid,uid,number,oid)
-		values(#{pid},#{uid},#{number},LAST_INSERT_ID())
+		values(#{pid},#{uid},#{number},#{oid})
 	</insert>
 	<select id="getMyOrder" resultType="MyOrder">
-		select o.id,o.createDate,o.orderNum,o.status,oi.number,tp.price,tp.name from `order` o,`orderitem` oi,`t_product` tp where o.id=oi.oid and oi.pid=tp.id order by o.orderNum
+		select o.id,o.createDate,o.orderNum,o.status,oi.number,oi.pid,oi.uid,tp.price,tp.name from `order` o,`orderitem` oi,`t_product` tp where o.id=oi.oid and oi.pid=tp.id order by o.orderNum
 	</select>
 	
 	<select id="getOrderUnPay" resultType="MyOrder">

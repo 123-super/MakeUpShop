@@ -7,5 +7,6 @@ import com.bean.PropertyValue;
 
 public interface ProductMapper {
      public List<Product> getProductById(Integer id);
+     public List<Product> searchProduct(String name);
     
 }
