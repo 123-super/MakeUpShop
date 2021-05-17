@@ -95,6 +95,12 @@ public class OrderServiceImpl implements OrderService{
 		return ordermapper.getComment(pid);
 	}
 
+	@Override
+	public void updOrderById(MyOrder order) {
+		// TODO Auto-generated method stub
+		ordermapper.updOrderById(order);
+	}
+
 	
 
 

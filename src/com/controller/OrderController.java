@@ -39,6 +39,12 @@ public class OrderController {
 		public void addComment(Comment comment) {
 			orderservice.addComment(comment);
 			}
+		
+		@RequestMapping(value = "/updOrderById", method = RequestMethod.POST,produces = "application/json;charsest=utf-8")
+		@ResponseBody
+		public void updOrderById(MyOrder order) {
+			orderservice.updOrderById(order);;
+			}
 		@RequestMapping(value = "/getComment", method = RequestMethod.GET,produces = "application/json;charsest=utf-8")
 		@ResponseBody
 		public String getComment(Integer pid) {

@@ -22,4 +22,5 @@ public interface OrderService {
 	public void updateStatus(Integer id);
 	public void updLeftStatus(MyOrder order);
 	public void addComment(Comment comment);
+	public void updOrderById(MyOrder order);
 }

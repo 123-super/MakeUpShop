@@ -50,6 +50,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delCurrentOrder2">	
 	   delete o from `order` o where o.id=#{0} 
 	</delete>
+	
+	<update id="updOrderById">
+    update `order`
+    <set>
+      <if test="receiverName != null and receiverName != ''">
+        receiverName = #{receiverName},
+      </if>
+      <if test="tel != null and tel != ''">
+        tel = #{tel},
+      </if>
+       <if test="status != null and status != ''">
+        status = #{status},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
 	<update id="updateStatus">
 		update `order` set
 		status="催卖家发货"

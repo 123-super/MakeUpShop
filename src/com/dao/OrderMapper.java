@@ -25,4 +25,5 @@ public interface OrderMapper {
 	public Order getOrderId(String orderNum);
 	public void updateStatus(Integer id);
 	public void updLeftStatus(MyOrder order);
+	public void updOrderById(MyOrder order);
 }
