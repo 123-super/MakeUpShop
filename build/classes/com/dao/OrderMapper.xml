@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{pid},#{uid},#{number},#{oid})
 	</insert>
 	<select id="getMyOrder" resultType="MyOrder">
-		select o.id,o.createDate,o.orderNum,o.status,oi.number,oi.pid,oi.uid,tp.price,tp.name from `order` o,`orderitem` oi,`t_product` tp where o.id=oi.oid and oi.pid=tp.id order by o.orderNum
+		select o.id,o.createDate,o.orderNum,o.status,o.receiverName,o.tel,oi.number,oi.pid,oi.uid,tp.price,tp.name from `order` o,`orderitem` oi,`t_product` tp where o.id=oi.oid and oi.pid=tp.id order by o.orderNum
 	</select>
 	
 	<select id="getOrderUnPay" resultType="MyOrder">

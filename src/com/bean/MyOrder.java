@@ -9,6 +9,20 @@ public class MyOrder {
 	private Integer id;
 	private Integer pid;
 	private Integer uid;
+	private String receiverName;
+	private String tel;
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getReceiverName() {
+		return receiverName;
+	}
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
 	public Integer getUid() {
 		return uid;
 	}
