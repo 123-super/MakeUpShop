@@ -13,11 +13,22 @@ import com.dao.CategoryMapper;
 public class CategoryServiceImpl implements CategoryService{
 	@Autowired 
 	private CategoryMapper categorymapper;
-@Override	
-
+	
+	@Override	
 	public List<Category> getCategory() {
-		return categorymapper.getCategory();
-	};
+		return categorymapper.getCategory(new Category());
+	}
+
+	@Override
+	public List<Category> selectCategoryList(Category category) {
+		return categorymapper.getCategory(category);
+	}
+	
+	@Override
+	public Category getCategoryById(Integer cid) {
+		return categorymapper.getCategoryById(cid);
+	}
+	
 	@Override	
 	public List<Product> getProductByCid(Integer cid){
 		return categorymapper.getProductByCid(cid);

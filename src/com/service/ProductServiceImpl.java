@@ -12,6 +12,12 @@ import com.dao.ProductMapper;
 public class ProductServiceImpl implements ProductService{
 	@Autowired 
 	private ProductMapper productmapper;
+	
+	@Override
+	public List<Product> listProduct(Product product) {
+		return productmapper.listProduct(product); 
+	}
+	
 	@Override	
 	public List<Product> getProductById(Integer id){
 		return productmapper.getProductById(id);
@@ -22,5 +28,18 @@ public class ProductServiceImpl implements ProductService{
 		return productmapper.searchProduct(name);
 	}
 	
+	@Override
+	public int insertProduct(Product product) {
+		return productmapper.insertProduct(product);
+	}
 	
+	@Override
+	public int updateProduct(Product product) {
+		return productmapper.updateProduct(product);
+	}
+
+	@Override
+	public int deleteProductById(Integer id) {
+		return productmapper.deleteProductById(id);
+	}
 }

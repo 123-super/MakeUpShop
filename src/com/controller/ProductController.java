@@ -24,6 +24,7 @@ import com.service.ProductService;
 public class ProductController {
 	@Autowired
 	private ProductService productservice;
+	
 	@RequestMapping(value = "/getProductById", method = RequestMethod.GET, produces = "application/json;charsest=utf-8")
 	@ResponseBody
 	public String getProductById(Integer id){
@@ -31,14 +32,37 @@ public class ProductController {
 		System.out.println(product);
 		return JSON.toJSONString(Result.success(product));		
 	}
+	
+	@RequestMapping(value = "/listProduct", method = RequestMethod.GET, produces = "application/json;charsest=utf-8")
+	@ResponseBody
+	public String listProductById(Product product) {
+		List<Product> productList = productservice.listProduct(product);
+		return JSON.toJSONString(Result.success(productList));		
+	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json;charsest=utf-8")
 	@ResponseBody
 	public String search(String name){
 		List<Product> product = productservice.searchProduct(name);
 		return JSON.toJSONString(Result.success(product));
-		
-		
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json;charsest=utf-8")
+	@ResponseBody
+	public String add(Product product) {
+		return JSON.toJSONString(Result.toResult(productservice.insertProduct(product)));		
+	}
+	
+	@RequestMapping(value = "/put", method = RequestMethod.POST, produces = "application/json;charsest=utf-8")
+	@ResponseBody
+	public String update(Product product) {
+		return JSON.toJSONString(Result.toResult(productservice.updateProduct(product)));		
+	}
+	
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST, produces = "application/json;charsest=utf-8")
+	@ResponseBody
+	public String delete(@PathVariable Integer id) {
+		return JSON.toJSONString(Result.toResult(productservice.deleteProductById(id)));		
 	}
 	
 	@RequestMapping(value = "/productImage/{pid}", method = RequestMethod.GET, produces = "application/json;charsest=utf-8")
