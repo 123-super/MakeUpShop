@@ -7,6 +7,8 @@ import com.bean.Product;
 
 public interface CategoryService {
 	public List<Category> getCategory();
+	public List<Category> selectCategoryList(Category category);
+	public Category getCategoryById(Integer cid);
 	public List<Product> getProductByCid(Integer cid);
 	public List<Product> getProductByCidlimit(Integer cid);
 	public List<Category> search(String seach);

@@ -22,11 +22,21 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/getCategory", method = RequestMethod.GET, produces = "application/json;charsest=utf-8")
 	@ResponseBody
-	public String getCategory() {
-		List<Category> category = categoryservice.getCategory();
+	public String getCategory(Category category) {
+		List<Category> categoryList = categoryservice.selectCategoryList(category);
+		System.out.print(category+"+++++++++++++");
+		return JSON.toJSONString(Result.success(categoryList));
+	}
+	
+	@RequestMapping(value = "/getCategoryById", method = RequestMethod.GET, produces = "application/json;charsest=utf-8")
+	@ResponseBody
+	public String getCategoryById(Integer cid) {
+		Category category = categoryservice.getCategoryById(cid);
 		System.out.print(category+"+++++++++++++");
 		return JSON.toJSONString(Result.success(category));
 	}
+	
+	
 	@RequestMapping(value = "/getProductByCid", method = RequestMethod.GET, produces = "application/json;charsest=utf-8")
 	@ResponseBody
 	public String getProductByCid(Integer cid) {

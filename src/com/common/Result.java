@@ -21,4 +21,8 @@ public class Result extends HashMap<Object, Object> {
 		return new Result(ERROR, null);
 	}
 
+	public static Result toResult(int count) {
+		if (count > 0) return Result.success("²Ù×÷³É¹¦");
+		return Result.error(); 
+	}
 }

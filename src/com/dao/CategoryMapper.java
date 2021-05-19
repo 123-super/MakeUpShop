@@ -6,7 +6,8 @@ import com.bean.Category;
 import com.bean.Product;
 
 public interface CategoryMapper {
-public List<Category> getCategory();
+public List<Category> getCategory(Category category);
+public Category getCategoryById(Integer cid);
 public List<Product> getProductByCid(Integer cid);
 public List<Product> getProductByCidlimit(Integer cid);
 public List<Category> search(String seach);
